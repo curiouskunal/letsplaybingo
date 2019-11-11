@@ -169,6 +169,12 @@ img {
   justify-content: center;
 }
 
+.flexSpace{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 footer {
   background: #f8f8f8;
   padding: 0.5rem;
@@ -188,13 +194,13 @@ footer {
 
 @keyframes blink {
   0% {
-    color: white;
+    color: red;
   }
   50% {
     color: #444;
   }
   100% {
-    color: white;
+    color: red;
   }
 }
 

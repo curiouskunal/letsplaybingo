@@ -112,7 +112,7 @@ class LetsPlayBingo extends Component {
       interval: 0,
       delay: 10000,
       selectedCaller: null,
-      speechEnabled: window.hasOwnProperty('speechSynthesis'),
+      speechEnabled: false,
       synth: window.speechSynthesis,
       voices: []
     };
@@ -173,10 +173,8 @@ class LetsPlayBingo extends Component {
   };
 
   startGame = () => {
-    if(this.state.newGame) {
-      this.say("Let's Play Bingo!");
-    }
-    setTimeout(this.toggleGame, 1500);
+    this.setState({newGame: false});
+    this.callNumber();
   };
 
   /*
@@ -255,6 +253,8 @@ class LetsPlayBingo extends Component {
         (ballstring.length === 2 ? [ballstring.charAt(0), ' ', ballstring.charAt(1)] : newBall.number)]);
       // update the state to re-render the board
       this.setState({balls: balls});
+      const audioEl = document.getElementsByClassName("audio-element")[0];
+      audioEl.play();
     }
   };
 
@@ -266,84 +266,36 @@ class LetsPlayBingo extends Component {
   render() {
     return (
       <div className="App">
-
-        <section id="board">
-          <div className="row flex">
-            <div className="col c85">
-              <BingoBoard balls={this.state.balls} />
-            </div>
-            <div className="col c15 padding">
-              <BallDisplay balls={this.state.balls}/>
-            </div>
+        <div style={{display:'flex', flexDirection: 'column',justifyContent:'space-between', height:'100vh'}}>
+          <div style={{display:'flex', flexDirection: 'column',justifyContent:'center', height:'100%', background:'#222222'}}>
+            <section id="board">
+              <div className="row flex">
+                <div className="col c85">
+                  <BingoBoard balls={this.state.balls} />
+                </div>
+                <div className="col c15 padding">
+                  <BallDisplay balls={this.state.balls}/>
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
 
-        <section id="buttons">
-          <div className="row">
-            <div className="col c40">
-              <button onClick={this.state.newGame ? this.startGame : this.toggleGame}>
-                {this.state.newGame ? 'Start' : this.state.running ? 'Pause' : 'Resume'}
-              </button>
-              <button onClick={this.callNumber} disabled={this.state.running ? 'disabled' : ''}>Next Number</button>
-              <button onClick={this.resetGame}>Reset</button>
-            </div>
-            <div className="col c40 text-center">
-              <div id="speed">
-                <span>Slow</span><input onChange={(e) => this.setDelay(e)} type="range" value={this.state.delay}  min="5000" max="16000" step="1000"/><span>Fast</span>
+          <section id="buttons">
+            <div className="row">
+              <div className="flexSpace">
+                <button onClick={this.state.newGame ? this.startGame : this.resetGame}>
+                  {this.state.newGame ? 'Start' : 'Reset'}
+                </button>
+                <button onClick={this.callNumber} disabled={this.state.running ? 'disabled' : ''}>Next Number</button>
               </div>
             </div>
-            <div className="col c20 text-right">
-              {this.state.speechEnabled ?
-                <Select name="voiceselect" placeholder="Choose Caller" searchable
-                        onBlurResetsInput={true}
-                        value={this.state.selectedCaller ? this.state.selectedCaller.value : ''}
-                        onChange={this.chooseCaller}
-                        options={_.map(this.state.voices, (voice, index) => (
-                          {value: index, label: (voice.name + ' / ' + getLanguageText(voice.lang))}
-                        ))}
-                />
-              : "Sorry, your browser doesn't support our vocal caller! Try Chrome!"}
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="row">
-            <div className="col c20 padding text-center">
-              <Pattern />
-            </div>
-            <div className="col c60 padding">
-              <p className="description">Use this free bingo caller to host your own bingo games at home! You
-              provide the cards, we generate the bingo numbers! Completely free bingo app - no downloads necessary!
-              </p>
-              <p className="disclaimer">
-                LetsPlayBingo.io does not intend for the bingo caller contained on this website to be used for illegal or gambling purposes. The information and bingo caller contained on this website is for entertainment purposes only. This website, its owners and associates do not have any control over the use of this bingo caller and cannot be held liable for any monetary or other losses incurred by unapproved use of this bingo caller or generated bingo cards.
-              </p>
-              <div className="top-bottom-padding">
-                <div className="addthis_inline_share_toolbox"></div>
-              </div>
-            </div>
-            <div className="col c20 text-center padding">
-              <img className="logo" src={logo} alt="Let's Play Bingo Logo"/>
-              <p className="intl">We're now international!</p>
-              <div id="google_translate_element"></div>
-            </div>
-          </div>
-        </section>
-
-        <footer>
-          <div className="row">
-            <div className="col c25 text-left">
-              <p>For entertainment purposes only.</p>
-            </div>
-            <div className="col c50 text-center">
-              <p>Let's Play Bingo! © 2019 <a href="http://karolbrennan.com" target="_blank">Karol Brennan</a></p>
-            </div>
-            <div className="col c25 text-right">
-              <p>Check out this project on <a href="http://github.com/karolbrennan/letsplaybingo" target="_blank">GitHub</a></p>
-            </div>
-          </div>
-        </footer>
+          </section>
+        </div>
+        <div>
+          <audio className="audio-element">
+            <source src="src/images/audio_file.mp3"></source>
+          </audio>
+        </div>
       </div>
     );
   }

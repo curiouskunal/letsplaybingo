@@ -46,11 +46,7 @@ class BallDisplay extends React.Component {
       return (
         <div id="ball" className="white relative notranslate">
           <div id="ballcount">{_.where(this.props.balls, {called: true}).length}</div>
-          <div className="content">
-            <span>
-             <img src={logo} alt="Lets Play Bingo Logo"/>
-            </span>
-          </div>
+          <div className="content"></div>
         </div>
       )
     }
