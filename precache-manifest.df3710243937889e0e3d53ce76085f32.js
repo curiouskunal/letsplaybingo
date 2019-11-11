@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9ed79cb401f2b0627027976a756af92",
+    "revision": "14128755d6933d2c42d1ae8fd0ba84d0",
     "url": "/letsplaybingo/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/letsplaybingo/static/css/2.699efa4f.chunk.css"
   },
   {
-    "revision": "5c2e6bfa954c3c00d6dd",
+    "revision": "152c14489cdebe8eee80",
     "url": "/letsplaybingo/static/css/main.f29ea1a6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/letsplaybingo/static/js/2.c831cc3b.chunk.js"
   },
   {
-    "revision": "5c2e6bfa954c3c00d6dd",
-    "url": "/letsplaybingo/static/js/main.06ab1973.chunk.js"
+    "revision": "152c14489cdebe8eee80",
+    "url": "/letsplaybingo/static/js/main.1d0faaaa.chunk.js"
   },
   {
     "revision": "3415b3e29ca13ae70888",
