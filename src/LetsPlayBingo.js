@@ -293,7 +293,7 @@ class LetsPlayBingo extends Component {
         </div>
         <div>
           <audio className="audio-element">
-            <source src="src/images/audio_file.mp3"></source>
+            <source src="audio_file.mp3"></source>
           </audio>
         </div>
       </div>
